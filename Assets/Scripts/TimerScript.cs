@@ -4,28 +4,41 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class Timer : MonoBehaviour {
+//Class name needs to match file name, jeez
+public class TimerScript : MonoBehaviour
+{
     private Text timerText;
     private float levelTime;
-    
-    // Start is called before the first frame update
-    Start() {
+
+    //added void return type    
+    void Start()
+    {
         timerText = GetComponent<Text>();
         ResetTimer();
     }
-    
-    public void ResetTimer(){
+
+    public void ResetTimer()
+    {
         levelTime = 30;
     }
 
     // Update is called once per frame
-    void FixedUpdate() {
-        if(levelTime > 0){
-            levelTime += Time.deltaTime;
-            timerText.text = levelTime + " SECONDS LEFT";       
+    //fixedUpdate is not called once a frame, so this is technically a lie
+    void FixedUpdate()
+    {
+        if (levelTime > 0)
+        {
+            //you invented a time machine, congrats
+            levelTime -= Time.deltaTime;
+            //this is ugly and horrible code but it does what I want
+            //timerText.text = (float)((int)(levelTime*10))/10 + " SECONDS LEFT";
+            timerText.text = levelTime.ToString("F1") + " SECONDS LEFT";
         }
-        else {
+        else
+        {
             SceneManager.LoadScene("GameOver");
         }
     }
+    //ahh! Missing a bracket!
+}
 

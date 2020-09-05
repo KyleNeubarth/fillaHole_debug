@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using UnityEngine.UI;
+//Did you seriously just comment this out
+using UnityEngine.UI;
 
 public class ScoreScript : MonoBehaviour {
     private Text scoreText;
@@ -9,25 +10,28 @@ public class ScoreScript : MonoBehaviour {
 
     public static ScoreScript S;
     
-    // Start is called before the first frame update
     void Start() {
-        score = 0.0f;
+        //changed 0.0f to 0, score is an int
+        score = 0;
         scoreText = GetComponent<Text>();
         DisplayScore();
         S = this;
     }
 
-    private void IncreaseScore() {
+    //Function isn't ever referenced in this script, therefore would be useless if private
+    public void IncreaseScore() {
         score++;
         DisplayScore();
     }
     
     public void DecreaseScore() {
-        score-;
+        //changed - operator to --, decrement
+        score--;
         DisplayScore();
     }
 
     private void DisplayScore() {
-        scoreText.text = "SCORE: " + scr;
+        //scr -> score
+        scoreText.text = "SCORE: " + score;
     }
 }

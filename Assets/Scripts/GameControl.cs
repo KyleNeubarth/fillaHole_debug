@@ -4,15 +4,9 @@ using UnityEngine;
 
 public class GameControl : MonoBehaviour
 {
-    // Start is called before the first frame update
     void Start() {
-	    DontDestroyOnLoad(this);
+	    //This is unecessary, you have a cemera in both scenes
+	    //DontDestroyOnLoad(this);
 	    Screen.SetResolution(300,400,false);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

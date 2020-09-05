@@ -3,16 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class HoleScript : MonoBehaviour {
+
     public KeyCode holeKey;
     
-    private boolean filled;
+    //boolean -> bool
+    private bool filled;
     private bool interactable;
 
     private SpriteRenderer sr;
     
     // Start is called before the first frame update
-    void Start() {
-        sr = GetComponent<SpiteRenderer>();
+    void Start()
+    {
+        //SpiteRenderer -? SpriteRenderer
+        sr = GetComponent<SpriteRenderer>();
         sr.color = Color.black;
         filled = true;
         interactable = false;
@@ -29,7 +33,8 @@ public class HoleScript : MonoBehaviour {
             if (Input.GetKeyDown(holeKey)) {
                 interactable = false;
                 StopCoroutine("Open");
-                Score()
+                //semicolon pls
+                Score();
                 Fill();
             }
         }
@@ -43,13 +48,15 @@ public class HoleScript : MonoBehaviour {
             // Am I spawning?
             if (doWeOpen < 2) {
                 // Open that hole!
-                StartCoroutine(Open);
+                //Open isn't a reference, use a string instead
+                StartCoroutine("Open");
             }
         }
     }
 
     private IEnumerator Open() {
-        sr.Color = Color.white;
+        //class vars are lowercase dingus
+        sr.color = Color.white;
         filled = false;
         interactable = true;
         yield return new WaitForSeconds(2);
@@ -57,6 +64,8 @@ public class HoleScript : MonoBehaviour {
         if (!filled) {
             // Oh no! You took too long
             interactable = false;
+            //The fact that this text gets underlined in red is hilarious
+            //I love it
             sr.color = Color.red;
             AudioControl.S.PlayMiss();
             ScoreScript.S.DecreaseScore();
@@ -68,13 +77,16 @@ public class HoleScript : MonoBehaviour {
     }
 
     private void Score() {
-        AudioControl.S.PlayFill();
+        //replaced lame sound with a better one
+        //AudioControl.S.PlayFill();
+        Instantiate(Resources.Load("Explosion"),transform.position,Quaternion.identity);
         ScoreScript.S.IncreaseScore();
     }
 
     private void Fill() {
         sr.color = Color.black;
         interactable = false;
-        filled == true;
+        //Changed == operator to = assignment
+        filled = true;
     }
 } 
